@@ -50,7 +50,7 @@ pip install torch numpy scipy
 From the repository root, run:
 
 ```bash
-python code/run_calibration.py
+python code/parent.py
 ```
 
 The script loads the example datasets from the `data/` folder and saves the calibration results to the `results/` folder.
