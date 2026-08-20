@@ -38,21 +38,12 @@ The demo requires Python 3 and the following packages:
 - NumPy
 - SciPy
 
-Install the required packages with:
+Install them with:
 
 ```bash
-pip install -r requirements.txt
+pip install torch numpy scipy
 ```
 
-A minimal `requirements.txt` is:
-
-```text
-torch
-numpy
-scipy
-```
-
-For reproducibility, the Python and package versions used for the publication should also be reported once the final implementation is frozen.
 
 ## Running the Demo
 
