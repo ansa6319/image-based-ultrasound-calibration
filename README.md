@@ -24,10 +24,9 @@ image-based-ultrasound-calibration/
 │   └── cal_150frames_fracdisp_005_divtrans.mat
 │
 ├── results/
-│   └── README.md
+│   └── result_cal_two_stage.mat
 │
-└── docs/
-    └── data_format.md
+
 ```
 
 ## Requirements
