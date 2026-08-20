@@ -1,8 +1,8 @@
 import torch
-import utilities as su
+import utilities_demo as su
 
 
-class calibration_beamformer(torch.nn.Module):
+class SSABeamformer_calibration_6DOF(torch.nn.Module):
     """Differentiable calibration beamformer for saved left-center-right trios."""
 
     def __init__(self, calibration, data, roi_mm, num_trios=20):
@@ -15,8 +15,8 @@ class calibration_beamformer(torch.nn.Module):
         tx_pos = torch.as_tensor(acq["data"]["tx_pos"][0][0], dtype=torch.float32)   # [element, xyz], m
         fs = torch.as_tensor(acq["data"]["fs"][0][0], dtype=torch.float32).squeeze()  
         t0 = torch.as_tensor(acq["data"]["t0"][0][0], dtype=torch.float32).squeeze()
-        self.c = 1450 # m/s
-        self.ele_focus = 0.06  # m
+        self.c = torch.as_tensor(acq["data"]["c"][0][0], dtype=torch.float32).squeeze() # m/s
+        self.ele_focus = torch.as_tensor(acq["data"]["elevation_focus"][0][0], dtype=torch.float32).squeeze()
         tx_z = tx_pos[0, 2]
         dist_vector = torch.arange(data[0, 0][0].shape[0], dtype=torch.float32) / fs + t0 / fs
 
