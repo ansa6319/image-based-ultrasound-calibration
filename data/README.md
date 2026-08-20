@@ -61,7 +61,7 @@ center vs. left
 center vs. right
 ```
 
-The calibration demo uses the first 20 trios by default.
+The calibration demo uses the first 20 trios, but up to 50 trios are available.
 
 ## Acquisition Parameters
 
@@ -77,23 +77,13 @@ The supplied files contain:
 |---|---|
 | `rx_pos` | Receive-element positions, `[64, 3]`, in meters |
 | `tx_pos` | Transmit reference position, in meters |
-| `t0` | Acquisition timing offset |
+| `t0` | Acquisition timing offset, in samples |
 | `fs` | Sampling frequency in Hz |
 | `c` | Assumed speed of sound in m/s |
 | `f0` | Transmit center frequency in Hz |
 | `elevation_focus` | Elevation focal depth in meters |
 | `trackingcal` | Tracked tool pose corresponding to each RF frame |
 
-For the supplied example:
-
-```text
-fs               = 10 MHz
-c                = 1450 m/s
-f0               = 2.5 MHz
-elevation_focus  = 0.06 m
-number of receive elements = 64
-number of frames           = 150
-```
 
 ### Element Coordinates
 
@@ -130,7 +120,7 @@ Tracking translations are stored in millimeters and converted to meters by `util
 
 To apply the calibration method to another tracked ultrasound acquisition, replace the two example `.mat` files with files following the same organization.
 
-The replacement data should provide:
+The replacement data should provide updated:
 
 ```text
 RF channel data
@@ -143,14 +133,5 @@ elevation focus, when applicable
 one tracked tool pose per RF frame
 ```
 
-The RF frames supplied to the calibration code should be organized as non-overlapping:
 
-```text
-left, center, right
-```
-
-trios.
-
-The two calibration stages use different frame selections. The example filenames encode the fractional displacement and diversity criterion used to create each dataset.
-
-If a different transducer or transmit sequence requires a different propagation model, the corresponding time-of-flight calculation in `beamformer.py` should be updated.
+If a different transmit sequence is used (not 0 degrees plane waves), the corresponding time-of-flight calculation in `beamformer.py` should be updated.
