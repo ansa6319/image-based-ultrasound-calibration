@@ -1,7 +1,7 @@
 import torch
 from scipy.io import loadmat, savemat
-import utilities_demo as su
-from beamformer_demo import SSABeamformer_calibration_6DOF
+import utilities as su
+from beamformer import calibration_beamformer
 
 # ============================================================
 # LOAD FILES
@@ -17,10 +17,10 @@ stage2_data = loadmat(STAGE2_FILE)["cal"]
 # OPTIMIZE
 # ============================================================
 # Run Stage 1 optimization
-stage1_model = SSABeamformer_calibration_6DOF(torch.zeros(6), stage1_data, (46, 54), NUM_TRIOS)
+stage1_model = calibration_beamformer(torch.zeros(6), stage1_data, (46, 54), NUM_TRIOS)
 stage1_last, _, stage1_loss = su.optimize(stage1_model, lr=5.0, patience=30, max_iters=300, name="Stage 1")
 # Run Stage 2 optimization (optional)
-stage2_model = SSABeamformer_calibration_6DOF(stage1_last, stage2_data, (11, 19), NUM_TRIOS)
+stage2_model = calibration_beamformer(stage1_last, stage2_data, (11, 19), NUM_TRIOS)
 _, stage2_best, stage2_loss = su.optimize(stage2_model, lr=5.0, patience=30, max_iters=300, name="Stage 2")
 
 # ============================================================
