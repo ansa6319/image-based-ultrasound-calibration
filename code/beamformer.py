@@ -2,7 +2,7 @@ import torch
 import utilities as su
 
 
-class SSABeamformer_calibration_6DOF(torch.nn.Module):
+class calibration_beamformer(torch.nn.Module):
     """Differentiable calibration beamformer for saved left-center-right trios."""
 
     def __init__(self, calibration, data, roi_mm, num_trios=20):
