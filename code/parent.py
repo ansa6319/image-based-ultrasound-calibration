@@ -23,6 +23,9 @@ STAGE1_FILE = DATA_DIR / "cal_150frames_fracdisp_002_divtrans.mat"
 STAGE2_FILE = DATA_DIR / "cal_150frames_fracdisp_005_divtrans.mat"
 OUTPUT_FILE = RESULTS_DIR / "result_cal_two_stage.mat"
 
+stage1_data = loadmat(STAGE1_FILE)["cal"]
+stage2_data = loadmat(STAGE2_FILE)["cal"]
+
 # ============================================================
 # OPTIMIZE
 # ============================================================
