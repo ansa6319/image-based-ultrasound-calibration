@@ -4,14 +4,23 @@ import utilities as su
 from beamformer import calibration_beamformer
 
 # ============================================================
+# PATHS
+# ============================================================
+
+ROOT = Path(__file__).resolve().parent.parent
+DATA_DIR = ROOT / "data"
+RESULTS_DIR = ROOT / "results"
+RESULTS_DIR.mkdir(exist_ok=True)
+
+# ============================================================
 # LOAD FILES
 # ============================================================
+
 NUM_TRIOS = 20
-STAGE1_FILE = f"cal_150frames_fracdisp_002_divtrans.mat"
-STAGE2_FILE = f"cal_150frames_fracdisp_005_divtrans.mat"
-OUTPUT_FILE = "result_cal_two_stage.mat"
-stage1_data = loadmat(STAGE1_FILE)["cal"]
-stage2_data = loadmat(STAGE2_FILE)["cal"]
+
+STAGE1_FILE = DATA_DIR / "cal_150frames_fracdisp_002_divtrans.mat"
+STAGE2_FILE = DATA_DIR / "cal_150frames_fracdisp_005_divtrans.mat"
+OUTPUT_FILE = RESULTS_DIR / "result_cal_two_stage.mat"
 
 # ============================================================
 # OPTIMIZE
