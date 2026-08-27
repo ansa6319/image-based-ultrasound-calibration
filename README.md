@@ -148,6 +148,20 @@ The calibration parameter order is:
 
 Rotations are represented in degrees and translations in millimeters. The homogeneous calibration matrix is constructed using the rotation convention implemented in `utilities.py`, with translations converted to meters.
 
+## Expected Optimization Behavior
+
+Part (a) of the figure below shows the expected loss history for the two-stage calibration using the default settings.
+
+Stage 1 typically produces the largest decrease in loss and provides the primary calibration update. Stage 2 is initialized from the Stage 1 result and uses frame trios with larger relative transducer displacement. Because these frames are more widely separated, their image similarity is lower, and the Stage 2 loss is therefore expected to remain at a higher value rather than reaching the lower loss values observed in Stage 1. For this reason, the absolute loss values from Stage 1 and Stage 2 should not be compared directly.
+
+Stage 2 generally produces a smaller reduction in loss because the calibration has already been substantially improved by Stage 1. Nevertheless, this refinement can further improve the final geometric calibration. In the example provided here, the mean wire-line residual (MWLR) improved from 0.769 mm after Stage 1 to 0.341 mm after Stage 2.
+
+Part (b) shows the corresponding N-wire validation, illustrating the positions of the reconstructed wire observations relative to the fitted wire lines for the Stage 1 and Stage 2 calibration results.
+
+For applications where the Stage 1 accuracy is already sufficient, the second refinement stage may not be necessary. Stage 2 is intended as an optional refinement when higher calibration accuracy is desired.
+<img width="3816" height="4136" alt="result" src="https://github.com/user-attachments/assets/3c7073cc-051e-4fe4-a279-cc853ac5cf56" />
+
+
 ## Adapting the Implementation to Another Dataset
 
 The included data provide one reproducible example of the calibration workflow. To apply the method to another tracked ultrasound acquisition or transducer, replace the example input data with files containing the required acquisition geometry, RF channel data, and tracked tool poses.
